@@ -5,21 +5,21 @@ module.exports = {
     "username": process.env.DB_USERNAME,
     "password": process.env.DB_PASS,
     "database": process.env.DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": process.env.DB_HOST,
+    "dialect": process.env.DB_DIALECT
   },
   "test": {
     "username": process.env.DB_USERNAME,
     "password": process.env.DB_PASS,
     "database": process.env.DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": process.env.DB_HOST,
+    "dialect": process.env.DB_DIALECT
   },
   "production": {
     "username": process.env.DB_USERNAME,
     "password": process.env.DB_PASS,
     "database": process.env.DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": process.env.DB_HOST,
+    "dialect": process.env.DB_DIALECT
   }
 }
