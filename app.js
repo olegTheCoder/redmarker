@@ -34,6 +34,11 @@ app.use(session(sessionConfig));
 app.use((req, res, next) => {
   if (req.session.userEmail) {
     res.locals.userEmail = req.session.userEmail;
+    
+  if (req.session.userId) {
+    res.locals.userId = req.session.userId
+    res.locals.userName = req.session.userName
+    res.locals.isadmin = req.session.isadmin
   }
   next();
 });
