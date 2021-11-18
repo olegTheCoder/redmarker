@@ -18,4 +18,4 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use('/', indexRouter);
 app.use('/lk', lkRouter);
 
-app.listen(PORT, () => console.log(`Vse ok na ${PORT}`));
+app.listen(PORT, () => console.log(`Server is working on ${PORT}`));
