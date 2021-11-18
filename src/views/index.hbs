@@ -1,13 +1,16 @@
-<main style="height: 100%; display: table-row;">
-    <form class="d-flex justify-content-center my-50" style="margin-top: 10% !important" action="/checkurl" method="POST">  
+<main style="height: 100%; display: table-row;" data-allSearch>
+  <form name='urlForm' class="d-flex justify-content-center my-50" style="margin-top: 10% !important">
     <div class="card text-center" style="width: 50em;">
-        <div class="card-body">
-          <h5 class="card-title">Введите адрес сайта</h5>
-          <div class="mb-3">
-            <input type="text" class="form-control" id="url" name="url">
-          </div>
-          <a href="#" class="btn btn-primary">Проверить</a>
+      <div class="card-body">
+        <h5 class="card-title">Введите адрес сайта</h5>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="url" name="url">
         </div>
+        <button type="submit" class="btn btn-primary">Проверить</button>
       </div>
-      </form>
-  </main>
+
+    </div>
+
+  </form>
+
+</main>

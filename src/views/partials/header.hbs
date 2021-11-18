@@ -3,13 +3,13 @@
 
     <div class="container-fluid">
       <ul class="navbar-nav">
-        <a class="navbar-brand" href="#">
-          <img src="/img/index.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/">
+          <img src="/img/index.png" alt="" width="30" height="30" class="d-inline-block align-text-top" href="/">
           RED MARKER
         </a>
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Главная</a>
+          <a class="nav-link active" aria-current="page" href="/">Главная</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">О нас</a>
@@ -21,15 +21,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <form class="d-flex justify-content-end">
         <ul class="navbar-nav">
+          {{#unless userId}}
           <li class="nav-item">
             <a class="nav-link" href="#">Войти</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Регистрация</a>
           </li>
+          {{/unless}}
+          {{#if userId}}
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">ЛK</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Выйти</a>
           </li>
+          {{/if}}
         </ul>
       </form>
 

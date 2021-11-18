@@ -35,10 +35,12 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use((req, res, next) => {
   if (req.session.userId) {
     res.locals.userId = req.session.userId
-    res.locals.userRole = req.session.userRole
+    res.locals.userIsadmin = req.session.userIsadmin
+  } else {
+    next()
   }
-  next()
 })
+
 
 app.use('/', indexRouter);
 app.use('/lk', lkRouter);
