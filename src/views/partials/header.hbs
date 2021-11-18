@@ -21,15 +21,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <form class="d-flex justify-content-end">
         <ul class="navbar-nav">
+          {{#unless userId}}
           <li class="nav-item">
             <a class="nav-link" href="#">Войти</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Регистрация</a>
           </li>
+          {{/unless}}
+          {{#if userId}}
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">ЛK</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Выйти</a>
           </li>
+          {{/if}}
         </ul>
       </form>
 

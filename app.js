@@ -36,9 +36,11 @@ app.use((req, res, next) => {
   if (req.session.userId) {
     res.locals.userId = req.session.userId
     res.locals.userIsadmin = req.session.userIsadmin
-  } else
+  } else {
     next()
+  }
 })
+
 
 app.use('/', indexRouter);
 app.use('/lk', lkRouter);
