@@ -35,9 +35,9 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use((req, res, next) => {
   if (req.session.userId) {
     res.locals.userId = req.session.userId
-    res.locals.userRole = req.session.userRole
-  }
-  next()
+    res.locals.userIsadmin = req.session.userIsadmin
+  } else
+    next()
 })
 
 app.use('/', indexRouter);
