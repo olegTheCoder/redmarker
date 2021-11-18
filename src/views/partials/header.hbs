@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <a class="navbar-brand" href="/">
+          <img src="/img/index.png" alt="" width="30" height="30" class="d-inline-block align-text-top" href="/">
+          RED MARKER
+        </a>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">О нас</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <form class="d-flex justify-content-end">
+        <ul class="navbar-nav">
+          {{#unless userEmail}}
+          <li class="nav-item">
+            <a class="nav-link" href="/sing_in">Войти</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/sing_up">Регистрация</a>
+          </li>
+          {{/unless}}
+          {{#if userEmail}}
+          <li class="nav-item">
+            <a class="nav-link" href="#">ЛK</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Выйти</a>
+          </li>
+          {{/if}}
+        </ul>
+      </form>
+
+      </ul>
+    </div>
+  </div>
+</nav>
