@@ -12,5 +12,7 @@ module.exports = {
     ecmaVersion: 13,
   },
   rules: {
+    'no-restricted-syntax': ['error', 'FunctionExpression', 'WithStatement', "BinaryExpression[operator='in']"],
+    'no-console': 'off',
   },
 };

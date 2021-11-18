@@ -1,0 +1,31 @@
+<h2 class="my-5 d-flex justify-content-center">Личный кабинет</h2>
+
+
+<main style="height: 100%; display: table-row;">
+  <h2 class="my-5 d-flex justify-content-center">Здравствуйте, {{name}}!</h2>
+  <form class="d-flex justify-content-center" style="margin-top: 1% !important">
+    <div class="card text-center col-md-8 offset-md-2" style="width: 50em;">
+      <h3 class="my-5 d-flex justify-content-center">История запросов</h3>
+      <div class="mb-3" style="width: 50em;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Время запроса</th>
+              <th scope="col">Сайт запроса</th>
+              <th scope="col">Результат</th>
+            </tr>
+          </thead>
+        {{#each search}}
+          <tbody>
+            <tr>
+              <th scope="row">{{this.createdAt}}</th>
+              <td>{{this.url}}</td>
+              <td>{{this.result}}</td>
+            </tr>
+          </tbody>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+  </form>
+</main>

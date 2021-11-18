@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const indexRouter = require('./src/routes/index.router');
+// const indexRouter = require('./src/routes/index.router');
 const lkRouter = require('./src/routes/lk.router');
 const path = require('path');
 const hbs = require('hbs');
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.env.PWD, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/lk', lkRouter);
 
 app.listen(PORT, () => console.log(`Vse ok na ${PORT}`));
