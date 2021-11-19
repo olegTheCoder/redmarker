@@ -52,7 +52,7 @@ router.post('/singup', async (req, res) => {
     req.session.isadmin = newUser.isadmin;
     console.log(newUser);
     res.redirect('/');
-  } catch (err) { //rascoment
+  } catch (err) { 
     console.error(err);
     return res.render('error', {
       message: `ууупс, что-то пошло не так:
@@ -86,7 +86,6 @@ router.post('/singin', async (req, res) => {
       req.session.last_name = currentUser.last_name;
       req.session.userEmail = currentUser.email;
       req.session.isadmin = currentUser.isadmin
-      req.session.isLogin = true;
     }
     res.redirect('/');
   } catch (err) {
