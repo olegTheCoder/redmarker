@@ -1,38 +1,42 @@
-const router = require('express').Router()
-const bcrypt = require('bcrypt')
-const { Search, User } = require('../../db/models')
+const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const { Search, User } = require('../../db/models');
+const isCheckSite = require('../../algorithm');
 
-const saltRounds = 10
+const saltRounds = 10;
+
+let isCheckCont = async (url) => {
+  const check = await isCheckSite(url);
+  console.log('IS CHECK SITE', r);
+  return check;
+}
+
 
 router.get('/', (req, res) => {
-  res.render('index')
-})
+  res.render('index');
+});
 
 router.post('/', async (req, res) => {
   try {
-    const { url } = req.body
+    const { url } = req.body;
     let result = ''
-    const regex = /\w+$/
-    if (url.match(regex)[0] === 'ru') {
-      result = 'Соответствует'
-    }
-    else {
-      result = 'Не соответствует'
-    }
+
+    const check = await isCheckSite(url);
+    check ? result = 'Соответствует' :  result = 'Не соответствует';
 
     const newSearch = { url, result }
 
     if (req.session.userId) {
-      const user_id = req.session.userId
-      const newSearchLog = await Search.create({ url, result, user_id })
-      req.session.searchUserId = newSearchLog.user_id
+      const user_id = req.session.userId;
+      const newSearchLog = await Search.create({ url, result, user_id });
+      req.session.searchUserId = newSearchLog.user_id;
     }
 
-    res.json(newSearch)
+    res.json(newSearch);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-})
+});
 
 
 /* Регистрация */
@@ -52,13 +56,13 @@ router.post('/singup', async (req, res) => {
     req.session.isadmin = newUser.isadmin;
     console.log(newUser);
     res.redirect('/');
-  } catch (err) { 
+  } catch (err) {
     console.error(err);
     return res.render('error', {
       message: `ууупс, что-то пошло не так:
       - возможно ты уже регистрировался, войди в систему
       - проверь что ввел именно EMAIL`,
-      error: {}
+      error: {},
     });
   }
 });
@@ -85,13 +89,13 @@ router.post('/singin', async (req, res) => {
       req.session.first_name = currentUser.first_name;
       req.session.last_name = currentUser.last_name;
       req.session.userEmail = currentUser.email;
-      req.session.isadmin = currentUser.isadmin
+      req.session.isadmin = currentUser.isadmin;
     }
     res.redirect('/');
   } catch (err) {
     res.render('error', {
       message: `непредвиденные проблемы, уже решаем (нет)`,
-      error: {}
+      error: {},
     });
   }
 });
