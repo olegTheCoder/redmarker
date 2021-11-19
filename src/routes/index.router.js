@@ -16,23 +16,24 @@ router.post('/', async (req, res) => {
     if (url.match(regex)[0] === 'ru') {
       result = 'Соответствует'
     }
-    else
+    else {
       result = 'Не соответствует'
+    }
 
-    // const user_id = newUser.id
     const newSearch = { url, result }
 
-    // if (req.session.userId) {
-    //   const newSearchLog = await Search.create({ url, result, user_id })
-    //   req.session.searchUserId = newSearchLog.user_id
-    // }
+    if (req.session.userId) {
+      const user_id = req.session.userId
+      const newSearchLog = await Search.create({ url, result, user_id })
+      req.session.searchUserId = newSearchLog.user_id
+    }
 
-    // res.render('answer', { url, result })
     res.json(newSearch)
   } catch (err) {
     console.log(err)
   }
 })
+
 
 /* Регистрация */
 router.get('/sing_up', (req, res) => {
@@ -41,24 +42,25 @@ router.get('/sing_up', (req, res) => {
 
 router.post('/singup', async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
-  //  try {
+  try {
     const hashedpass = await bcrypt.hash(password, saltRounds);
-    const newUser = await User.create({ first_name, last_name, email, password: hashedpass, isadmin: false,});
+    const newUser = await User.create({ first_name, last_name, email, password: hashedpass, isadmin: false, });
     req.session.userId = newUser.id;
     req.session.userEmail = newUser.email;
     req.session.first_name = newUser.first_name;
     req.session.last_name = newUser.last_name;
-console.log(newUser);
+    req.session.isadmin = newUser.isadmin;
+    console.log(newUser);
     res.redirect('/');
-  // } catch (err) {
-  //   console.error(err);
-  //   return res.render('error', {
-  //     message: `ууупс, что-то пошло не так:
-  //     - возможно ты уже регистрировался, войди в систему
-  //     - проверь что ввел именно EMAIL`,
-  //     error: {}
-  //   });
-  // }
+  } catch (err) { //rascoment
+    console.error(err);
+    return res.render('error', {
+      message: `ууупс, что-то пошло не так:
+      - возможно ты уже регистрировался, войди в систему
+      - проверь что ввел именно EMAIL`,
+      error: {}
+    });
+  }
 });
 
 
@@ -70,7 +72,7 @@ router.get('/sing_in', (req, res) => {
 router.post('/singin', async (req, res) => {
   const { email, password } = req.body;
   console.log('------', email, password);
-  
+
   try {
     const currentUser = await User.findOne({
       where: {
@@ -78,22 +80,16 @@ router.post('/singin', async (req, res) => {
       }
     });
 
-    if(currentUser && (await bcrypt.compare(password, currentUser.password))) {
+    if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.userId = currentUser.id;
       req.session.first_name = currentUser.first_name;
       req.session.last_name = currentUser.last_name;
       req.session.userEmail = currentUser.email;
+      req.session.isadmin = currentUser.isadmin
       req.session.isLogin = true;
     }
     res.redirect('/');
-
-    // res.render('error', {
-    //   message: `ууупс, что-то пошло не так:
-    //   - возможно ты еще не зарегистрировался
-    //   - или ввел неправильные данные`,
-    //   error: {}
-    // });
-  } catch(err) {
+  } catch (err) {
     res.render('error', {
       message: `непредвиденные проблемы, уже решаем (нет)`,
       error: {}
@@ -108,6 +104,3 @@ router.get('/logout', async (req, res) => {
 });
 
 module.exports = router;
-
-
-module.exports = router
