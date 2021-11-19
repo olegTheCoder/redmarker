@@ -67,15 +67,17 @@ $check?.addEventListener('click', async (event) => {
   console.log(data);
 });
 
+// HOMEPAGE
 const $urlForm = document.forms.urlForm;
 
-function insertCard({ id, url, result }) {
+function insertCard({ id, url, result, fine }) {
   return `<div data-allSearch class="container d-flex justify-content-center my-50">
   
     <div data-postid=${id} class='card my-3' style='width: 18rem;'>
     <div>
     Адрес сайта: ${url} <br>
-    Статус: ${result}
+    Статус: ${result} <br>
+    ${fine}
     </div>
     </div>
     </div>`;

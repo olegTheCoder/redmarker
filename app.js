@@ -32,10 +32,10 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(session(sessionConfig));
 
 app.use((req, res, next) => {
-  if (req.session.userEmail) {
+  if (req.session.userId) {
+    res.locals.name = req.session.first_name;
     res.locals.userEmail = req.session.userEmail;
     res.locals.userId = req.session.userId;
-    res.locals.userName = req.session.userName;
     res.locals.isadmin = req.session.isadmin;
   }
   next();
