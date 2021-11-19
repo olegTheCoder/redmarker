@@ -4,21 +4,26 @@ const { User, Search } = require('../../db/models');
 
 
 router.get('/', async (req, res) => {
-  req.session.userName = 'bob'
-  req.session.userId = 3
-  req.session.isadmin = true
+  // req.session.userName = 'bob'
+  // req.session.userId = 3
+  // req.session.isadmin = true
   const { userId } = req.session;
   let user;
   let search;
   let name;
+  let lastName
+
   try {
     user = await User.findAll({
       raw: true,
-      attributes: ['first_name', 'last_name'],
+      attributes: ['first_name', 'last_name', 'isadmin'],
       where: { id: userId }, // исправить user_id
     });
+    req.session.isadmin = user[0].isadmin;
+
+    // console.log(req.session.isadmin);
     name = user[0].first_name;
-    lastName = user[0].last_name
+    lastName = user[0].last_name;
     search = await Search.findAll({
       raw: true,
       where: { user_id: userId }, // исправить user_id
