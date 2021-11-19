@@ -1,23 +1,23 @@
-{{!-- <form id="registrationFrom" action="">
-  <input type="text" name="name" id="name">
-  <input type="text" name="login" id="login">
-  <input type="password" name="password" id="password">
-  <button type="submit">registration</button>
-</form> --}}
+<main style="height: 100%; display: table-row;"  data-allSearch>
+  <h2 class="my-5 d-flex justify-content-center">Вход в систему</h2>
 
-<h2 class="my-5 d-flex justify-content-center">Регистрация</h2>
-<form action="singin" method="POST" class="d-flex justify-content-center" style="margin-top: 1% !important">
-  <div class="card text-center col-md-8 offset-md-2" style="width: 50em;">
-    <!-- <div class="col-md-8 offset-md-2"></div> -->
+  <form action="singin" method="POST" class="d-flex justify-content-center my-50"
+    style="margin-top: 10% !important, flex-direction: column">
+
+    <div class="card text-center" style="width: 50em;">
+      <div class="card-body">
+        <h5 class="card-title">Введите логин</h5>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@email.ru">
+        </div>
+     
+        <h5 class="card-title">Введите пароль</h5>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+      </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </div>
     
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input name="password" type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary">Войти</button>
-  </div>
-</form>
+  </form>
+</main>

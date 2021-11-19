@@ -67,6 +67,7 @@ $check?.addEventListener('click', async (event) => {
   console.log(data);
 });
 
+// HOMEPAGE
 const $urlForm = document.forms.urlForm;
 
 function insertCard({ id, url, result }) {
