@@ -10,11 +10,7 @@ async function isCheckSite(url) {
       const $ = cheerio.load(response.data);
       const text = $('#footer-places-privacy').text()
 
-      if (text === 'Политика конфиденциальности') {
-        return true;
-      } else {
-        return false;
-      }
+      return (text === 'Политика конфиденциальности') 
     })
     .catch((err) => console.log("Fetch error " + err));
 }
