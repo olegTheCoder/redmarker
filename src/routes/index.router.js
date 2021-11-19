@@ -1,38 +1,39 @@
-const router = require('express').Router()
-const bcrypt = require('bcrypt')
-const { Search, User } = require('../../db/models')
+const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const { Search, User } = require('../../db/models');
 
-const saltRounds = 10
+const saltRounds = 10;
 
 router.get('/', (req, res) => {
-  res.render('index')
-})
+  res.render('index');
+});
 
 router.post('/', async (req, res) => {
   try {
-    const { url } = req.body
-    let result = ''
-    const regex = /\w+$/
+    const { url } = req.body;
+    let result = '';
+    const regex = /\w+$/;
+    let fine = '';
     if (url.match(regex)[0] === 'ru') {
-      result = 'Соответствует'
-    }
-    else {
-      result = 'Не соответствует'
+      result = 'Соответствует';
+    } else {
+      result = 'Не соответствует';
+      fine = 'Штраф 10 000 руб.';
     }
 
-    const newSearch = { url, result }
+    const newSearch = { url, result, fine };
 
     if (req.session.userId) {
-      const user_id = req.session.userId
-      const newSearchLog = await Search.create({ url, result, user_id })
-      req.session.searchUserId = newSearchLog.user_id
+      const user_id = req.session.userId;
+      const newSearchLog = await Search.create({ url, result, user_id });
+      req.session.searchUserId = newSearchLog.user_id;
     }
 
-    res.json(newSearch)
+    res.json(newSearch);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-})
+});
 
 
 /* Регистрация */
@@ -85,7 +86,7 @@ router.post('/singin', async (req, res) => {
       req.session.first_name = currentUser.first_name;
       req.session.last_name = currentUser.last_name;
       req.session.userEmail = currentUser.email;
-      req.session.isadmin = currentUser.isadmin
+      req.session.isadmin = currentUser.isadmin;
     }
     res.redirect('/');
   } catch (err) {
@@ -101,5 +102,11 @@ router.get('/logout', async (req, res) => {
   res.clearCookie('rmsid');
   res.redirect('/');
 });
+
+router.get('/about', (req, res) => {
+  res.render('about');
+});
+
+
 
 module.exports = router;
