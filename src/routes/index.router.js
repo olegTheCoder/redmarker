@@ -7,7 +7,6 @@ const saltRounds = 10;
 
 let isCheckCont = async (url) => {
   const check = await isCheckSite(url);
-  console.log('IS CHECK SITE', r);
   return check;
 }
 
@@ -19,10 +18,19 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { url } = req.body;
-    let result = ''
+    let result = '';
+    let fine = '';
 
     const check = await isCheckSite(url);
-    check ? result = 'Соответствует' :  result = 'Не соответствует';
+
+
+    if (check) {
+      fine = '';
+      result = 'Соответствует';
+    } else {
+      fine = 'Штраф 10 000 руб.';
+      result = 'Не соответствует';
+    }
 
     const newSearch = { url, result, fine };
 
