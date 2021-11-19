@@ -73,7 +73,7 @@ const $urlForm = document.forms.urlForm;
 function insertCard({ id, url, result, fine }) {
   return `<div data-allSearch class="container d-flex justify-content-center my-50">
   
-    <div data-postid=${id} class='card my-3' style='width: 18rem;'>
+    <div data-postid=${id} class='card my-2' style="width: 50em;">
     <div>
     Адрес сайта: ${url} <br>
     Статус: ${result} <br>
