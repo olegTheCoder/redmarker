@@ -1,8 +1,16 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { Search, User } = require('../../db/models');
+const isCheckSite = require('../../algorithm');
 
 const saltRounds = 10;
+
+let isCheckCont = async (url) => {
+  const check = await isCheckSite(url);
+  console.log('IS CHECK SITE', r);
+  return check;
+}
+
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -11,15 +19,10 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { url } = req.body;
-    let result = '';
-    const regex = /\w+$/;
-    let fine = '';
-    if (url.match(regex)[0] === 'ru') {
-      result = 'Соответствует';
-    } else {
-      result = 'Не соответствует';
-      fine = 'Штраф 10 000 руб.';
-    }
+    let result = ''
+
+    const check = await isCheckSite(url);
+    check ? result = 'Соответствует' :  result = 'Не соответствует';
 
     const newSearch = { url, result, fine };
 
@@ -59,7 +62,7 @@ router.post('/singup', async (req, res) => {
       message: `ууупс, что-то пошло не так:
       - возможно ты уже регистрировался, войди в систему
       - проверь что ввел именно EMAIL`,
-      error: {}
+      error: {},
     });
   }
 });
@@ -92,7 +95,7 @@ router.post('/singin', async (req, res) => {
   } catch (err) {
     res.render('error', {
       message: `непредвиденные проблемы, уже решаем (нет)`,
-      error: {}
+      error: {},
     });
   }
 });
