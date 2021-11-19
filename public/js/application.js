@@ -77,7 +77,7 @@ function insertCard({ id, url, result, fine }) {
     <div>
     Адрес сайта: ${url} <br>
     Статус: ${result} <br>
-    Итог: ${fine}
+    ${fine}
     </div>
     </div>
     </div>`;
